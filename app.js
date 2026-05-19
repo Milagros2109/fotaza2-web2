@@ -1,29 +1,32 @@
 import 'dotenv/config';
 import express from 'express';
 
-
+// CONSTANTES
 const PORT = process.env.PORT;
+
 const app = express();
 
-
+// MIDDLEWARES
+app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
+// MOTOR DE PLANTILLAS
 app.set('view engine', 'pug');
 app.set('views', './views');
 
-//rutas
+// RUTAS
 app.get('/', (req, res) => {
-  res.render('index');
+  res.render('index', {
+    pagina: 'Inicio'
+  });
 });
-  
-
+// SERVIDOR
 app.listen(PORT, (err) => {
   if(err) {
-    console.error(err);
+    console.error('Error al iniciar el servidor:', err);
     return;
   }
 
-  console.log(`Servidor corriendo en puerto ${PORT}`);
+  console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
