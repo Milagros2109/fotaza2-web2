@@ -1,25 +1,13 @@
 import { Router } from 'express';
 
+import {login,loginForm, registro, registroForm
+} from '../controller/auth.js';
+
 const auth = Router();
 
-auth.get('/login', (req, res) => {
-  res.render('auth/login', {
-    pagina: 'Login'
-  });
-});
-
-auth.post('/login', (req, res) => {
-  res.redirect('/');
-});
-
-auth.get('/registro', (req, res) => {
-  res.render('auth/registro', {
-    pagina: 'Registro'
-  });
-});
-
-auth.post('/registro', (req, res) => {
-  res.redirect('/');
-});
+auth.get('/login', loginForm);
+auth.post('/login', login);
+auth.get('/registro', registroForm);
+auth.post('/registro', registro);
 
 export default auth;

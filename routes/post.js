@@ -1,11 +1,9 @@
 import { Router } from 'express';
 
+import { postList } from '../controller/post.js';
+
 const post = Router();
 
-post.get('/', (req, res) => {
-  res.render('posts', {
-    pagina: 'Publicaciones'
-  });
-});
+post.get('/', postList);
 
-export default post;s
+export default post;
