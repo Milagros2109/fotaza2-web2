@@ -1,12 +1,12 @@
 import 'dotenv/config';
 import express from 'express';
+import { connectDatabase } from './models/index.js';
 
 import authRouter from './routes/auth.js';
 import postRouter from './routes/post.js';
 
 // CONSTANTES
 const PORT = process.env.PORT;
-
 const app = express();
 
 // MIDDLEWARES
@@ -34,11 +34,17 @@ app.use('/auth', authRouter);
 app.use('/posts', postRouter);
 
 // SERVIDOR
-app.listen(PORT, (err) => {
-  if(err) {
-    console.error('[+] Error al iniciar el servidor:', err);
-    return;
-  }
+connectDatabase()
+  .then(() => {
+    app.listen(PORT, (err) => {
+      if(err) {
+        console.error('Error al iniciar el servidor:', err);
+        return;
+      }
 
-  console.log(`[+] Servidor escuchando en el puerto ${PORT}`);
-});
+      console.log(`Servidor escuchando en el puerto ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error('Error sincronizando con bd:', err);
+  });
