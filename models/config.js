@@ -1,7 +1,25 @@
-export const dbConfig = {
+import 'dotenv/config';
+import { Sequelize } from 'sequelize';
+import pg from 'pg';
+
+const sslConn = process.env.DB_SSL == 'true'
+  ? {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      }
+    }
+  : undefined;
+
+const sequelize = new Sequelize({
+  dialect: 'postgres',
+  dialectModule: pg,
+  dialectOptions: sslConn,
   host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
+  username: process.env.DB_USER,
   database: process.env.DB_NAME,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD
-};
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+});
+
+export default sequelize;
