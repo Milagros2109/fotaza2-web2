@@ -1,19 +1,19 @@
-export const loginForm = (req, res) => {
-  res.render('auth/login', {
-    pagina: 'Login'
-  });
-};
+export async function loginForm(req, res) {
+  res.render('auth/login');
+}
 
-export const login = (req, res) => {
+export async function login(req, res) {
   res.redirect('/');
-};
+}
 
-export const registroForm = (req, res) => {
-  res.render('auth/registro', {
-    pagina: 'Registro'
-  });
-};
+export async function registroForm(req, res) {
+  res.render('auth/registro');
+}
 
-export const registro = (req, res) => {
+export async function registro(req, res) {
   res.redirect('/');
-};
+}
+
+export async function logout(req, res) {
+  res.redirect('/auth/login');
+}
