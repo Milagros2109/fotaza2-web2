@@ -1,7 +1,12 @@
 import { Model, DataTypes } from 'sequelize';
 import sequelize from './config.js';
+import bcrypt from 'bcrypt';
 
-export class User extends Model {}
+export class User extends Model {
+  validatePassword(password) {
+    return bcrypt.compare(password, this.password);
+  }
+}
 
 User.init(
   {
