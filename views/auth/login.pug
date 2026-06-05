@@ -1,15 +1,30 @@
-extends ../layout
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='/styles.css')
+    link(rel='stylesheet', href='/auth.css')
+    title Iniciar sesión
 
-block content
-  h1 Iniciar Sesión
+  body
+    div.container
+      div.form-wrapper
+        h1 Iniciar sesión
 
-  form(method='POST' action='/auth/login')
-    div
-      label Email
-      input(type='email' name='email')
+        form(method='POST', action='/auth/login')
 
-    div
-      label Contraseña
-      input(type='password' name='password')
+          div.form-group
+            label(for='email') Email
+            input(type='email', id='email', name='email', required)
 
-    button(type='submit') Ingresar
+          div.form-group
+            label(for='password') Contraseña
+            input(type='password', id='password', name='password', required)
+
+          div.form-group.center
+            button(type='submit') Iniciar sesión
+
+          p.redirect-link
+            | ¿No tienes cuenta?
+            a(href='/auth/registro') Registrate aquí
