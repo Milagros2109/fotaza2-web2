@@ -1,6 +1,6 @@
-import { Model, DataTypes } from 'sequelize';
-import sequelize from './config.js';
-import bcrypt from 'bcrypt';
+import { Model, DataTypes } from "sequelize";
+import sequelize from "./config.js";
+import bcrypt from "bcrypt";
 
 export class User extends Model {
   validatePassword(password) {
@@ -31,14 +31,14 @@ User.init(
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: 'Debe ser un email!',
-      },
+        isEmail: 'Debe ser un email!'
+      }
     },
 
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
+    }
   },
   {
     sequelize,
@@ -46,5 +46,16 @@ User.init(
     tableName: 'users',
     createdAt: true,
     updatedAt: true,
+    hooks: {
+      beforeSave: async (usuario) => {
+        if (!usuario.password) return;
+        if (!usuario.changed('password')) return;
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(usuario.password, salt);
+
+        usuario.password = hashedPassword;
+      }
+    }
   }
 );
