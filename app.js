@@ -4,6 +4,7 @@ import { connectDatabase } from './models/index.js';
 
 import authRouter from './routes/auth.js';
 import postRouter from './routes/post.js';
+import { authMiddleware } from './middleware/auth.js';
 
 // CONSTANTES
 const PORT = process.env.PORT;
@@ -31,7 +32,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/auth', authRouter);
-app.use('/posts', postRouter);
+app.use('/posts', authMiddleware, postRouter);
 
 // SERVIDOR
 connectDatabase()
