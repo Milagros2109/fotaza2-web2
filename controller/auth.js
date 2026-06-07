@@ -5,19 +5,18 @@ export async function loginForm(req, res) {
 }
 
 export async function login(req, res) {
+
   const { email, password } = req.body;
 
   const mail = email.trim();
   const pass = password.trim();
 
   if (!mail || !pass) {
-    res.status(400).render('auth/login', {
-      formValues: req.body
-    });
-    return;
+    return res.render('auth/login');
   }
 
   try {
+
     const user = await User.findOne({
       where: {
         email: mail
@@ -25,31 +24,28 @@ export async function login(req, res) {
     });
 
     if (!user) {
-      res.status(400).render('auth/login', {
-        formValues: req.body
-      });
-      return;
+      return res.render('auth/login');
     }
 
     const isValidated = await user.validatePassword(pass);
 
     if (!isValidated) {
-      res.status(400).render('auth/login', {
-        formValues: req.body
-      });
-      return;
+      return res.render('auth/login');
     }
 
+    // SESION
+    req.session.user = {
+      id: user.id,
+    };
+
+    res.redirect('/');
+
   } catch (error) {
-    console.log('[!] Error en login: ', error);
 
-    res.status(500).render('auth/login', {
-      formValues: req.body
-    });
-    return;
+    console.error(error);
+
+    res.render('auth/login');
   }
-
-  res.redirect('/');
 }
 
 export async function registroForm(req, res) {
@@ -57,7 +53,13 @@ export async function registroForm(req, res) {
 }
 
 export async function registro(req, res) {
-  const { firstName, lastName, email, password } = req.body;
+
+  const {
+    firstName,
+    lastName,
+    email,
+    password
+  } = req.body;
 
   const name = firstName.trim();
   const lastname = lastName.trim();
@@ -65,13 +67,11 @@ export async function registro(req, res) {
   const pass = password.trim();
 
   if (!name || !lastname || !mail || !pass) {
-    res.status(400).render('auth/registro', {
-      formValues: req.body
-    });
-    return;
+    return res.render('auth/registro');
   }
 
   try {
+
     await User.create({
       firstName: name,
       lastName: lastname,
@@ -79,18 +79,21 @@ export async function registro(req, res) {
       password: pass
     });
 
+    res.redirect('/auth/login');
+
   } catch (error) {
-    console.log('[!] Error en registro: ', error);
 
-    res.status(500).render('auth/registro', {
-      formValues: req.body
-    });
-    return;
+    console.error(error);
+
+    res.render('auth/registro');
   }
-
-  res.redirect('/auth/login');
 }
 
 export async function logout(req, res) {
+
+  if (req.session) {
+    await req.session.destroy();
+  }
+
   res.redirect('/auth/login');
 }
