@@ -1,16 +1,40 @@
-import sequelize from './config.js';
-import { User } from './User.js';
-import { Post } from './Post.js';
-import { Image } from './Image.js';
-import { Tag } from './Tag.js';
+import sequelize from "./config.js";
+import { User } from "./User.js";
+import { Post } from "./Post.js";
+import { Image } from "./Image.js";
+import { Tag } from "./Tag.js";
+
+let associationsInitialized = false;
+
+export function initializeAssociations() {
+  if (associationsInitialized) {
+    return;
+  }
+
+
+  User.hasMany(Post, { foreignKey: 'userId' });
+  Post.belongsTo(User, { foreignKey: 'userId' });
+
+  Post.hasMany(Image, { foreignKey: 'postId' });
+  Image.belongsTo(Post, { foreignKey: 'postId' });
+
+
+  Tag.hasMany(Post, { foreignKey: 'tagId' });
+  Post.belongsTo(Tag, { foreignKey: 'tagId' });
+
+  associationsInitialized = true;
+}
 
 export async function connectDatabase() {
   try {
+    initializeAssociations();
+
     await sequelize.authenticate();
     console.log('Conexion a bd establecida');
 
     await sequelize.sync({ alter: true });
     console.log('Sincronizado de modelos');
+
   } catch (error) {
     console.error('Error en la conexion a la bd', error);
     throw error;
