@@ -3,4 +3,13 @@ extends layout
 block content
   h1 Publicaciones
 
-  p Explora las publicaciones de Fotaza
+  if posts.length === 0
+    p No hay publicaciones cargadas.
+
+  else
+    each post in posts
+      div
+        h3= post.title
+        p= post.description
+        small Publicado el #{post.createdAt.toLocaleDateString()}
+        hr

@@ -1,8 +1,13 @@
 import { Post } from '../models/Post.js';
 
-export const postList = (req, res) => {
+export const postList = async (req, res) => {
+  const posts = await Post.findAll({
+    order: [['createdAt', 'DESC']]
+  });
+
   res.render('posts', {
-    pagina:'Publicaciones'
+    pagina: 'Publicaciones',
+    posts
   });
 };
 
@@ -11,11 +16,9 @@ export const createPostForm = (req, res) => {
 };
 
 export const createPost = async (req, res) => {
-
   const { title, description } = req.body;
 
   try {
-
     await Post.create({
       title,
       description,
@@ -25,7 +28,6 @@ export const createPost = async (req, res) => {
     res.redirect('/posts');
 
   } catch (error) {
-
     console.error(error);
 
     res.render('post/crear');
