@@ -1,5 +1,6 @@
 import sequelize from './config.js';
 import { User } from './User.js';
+import { Post } from './Post.js';
 
 export async function connectDatabase() {
   try {
