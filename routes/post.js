@@ -1,13 +1,17 @@
 import { Router } from 'express';
 
-import { postList } from '../controller/post.js';
+import {
+  postList,
+  createPostForm,
+  createPost
+} from '../controller/post.js';
 
 const post = Router();
 
 post.get('/', postList);
 
-post.get('/crear', (req, res) => {
-  res.render('post/crear');
-});
+post.get('/crear', createPostForm);
+
+post.post('/crear', createPost);
 
 export default post;
