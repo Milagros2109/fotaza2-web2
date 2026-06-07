@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+  h1 Crear publicación
+
+  form(method='POST' action='/posts/crear')
+    div
+      label(for='title') Título
+      input(type='text', id='title', name='title', required)
+
+    div
+      label(for='description') Descripción
+      textarea(id='description', name='description')
+
+    div
+      button(type='submit') Crear publicación
