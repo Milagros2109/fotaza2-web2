@@ -2,6 +2,7 @@ import sequelize from './config.js';
 import { User } from './User.js';
 import { Post } from './Post.js';
 import { Image } from './Image.js';
+import { Tag } from './Tag.js';
 
 export async function connectDatabase() {
   try {
