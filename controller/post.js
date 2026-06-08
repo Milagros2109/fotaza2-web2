@@ -2,6 +2,7 @@ import { Op } from 'sequelize';
 import { Post } from '../models/Post.js';
 import { Comment } from '../models/Comment.js';
 import { User } from '../models/User.js';
+import { Follower } from '../models/Follower.js';
 
 export const postList = async (req, res) => {
 
@@ -78,6 +79,39 @@ export const createComment = async (req, res) => {
     });
 
     res.redirect('/posts');
+
+  } catch (error) {
+
+    console.error(error);
+
+    res.redirect('/posts');
+  }
+};
+export const followingPosts = async (req, res) => {
+
+  const userId = req.session.user.id;
+
+  try {
+
+    const follows = await Follower.findAll({
+      where: {
+        followerId: userId
+      }
+    });
+
+    const followingIds = follows.map(f => f.followingId);
+
+    const posts = await Post.findAll({
+      where: {
+        userId: followingIds
+      },
+      order: [['createdAt', 'DESC']]
+    });
+
+    res.render('following-posts', {
+      pagina: 'Publicaciones seguidas',
+      posts
+    });
 
   } catch (error) {
 

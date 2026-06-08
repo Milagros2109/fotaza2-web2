@@ -1,0 +1,23 @@
+extends layout
+
+block content
+
+  h1 Publicaciones de usuarios seguidos
+
+  if posts.length === 0
+
+    p No hay publicaciones para mostrar.
+
+  else
+
+    each post in posts
+
+      div
+
+        h3= post.title
+
+        p= post.description
+
+        small Publicado el #{post.createdAt.toLocaleDateString()}
+
+        hr
