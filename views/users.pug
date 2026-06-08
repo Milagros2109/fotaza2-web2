@@ -1,0 +1,21 @@
+extends layout
+
+block content
+
+  h1 Usuarios
+
+  each user in users
+
+    div
+      p #{user.firstName} #{user.lastName}
+
+      form(method='POST' action='/users/follow')
+        input(
+          type='hidden'
+          name='followingId'
+          value=user.id
+        )
+
+        button(type='submit') Seguir
+
+      hr

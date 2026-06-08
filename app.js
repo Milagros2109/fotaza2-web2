@@ -6,6 +6,7 @@ import session from 'express-session';
 import authRouter from './routes/auth.js';
 import postRouter from './routes/post.js';
 import { authMiddleware } from './middleware/auth.js';
+import userRouter from './routes/user.js';
 
 // CONSTANTES
 const PORT = process.env.PORT;
@@ -37,7 +38,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
 // MOTOR DE PLANTILLAS
 app.set('view engine', 'pug');
 app.set('views', './views');
@@ -53,6 +53,7 @@ app.get('/', (req, res) => {
 
 app.use('/auth', authRouter);
 app.use('/posts', authMiddleware, postRouter);
+app.use('/users', authMiddleware, userRouter);
 
 // SERVIDOR
 connectDatabase()

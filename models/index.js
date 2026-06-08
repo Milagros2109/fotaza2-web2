@@ -4,6 +4,7 @@ import { Post } from "./Post.js";
 import { Image } from "./Image.js";
 import { Tag } from "./Tag.js";
 import { Comment } from './Comment.js';
+import { Follower } from './Follower.js';
 
 let associationsInitialized = false;
 
@@ -47,3 +48,15 @@ export async function connectDatabase() {
     throw error;
   }
 }
+
+User.belongsToMany(User, {
+  through: Follower,
+  as: 'Following',
+  foreignKey: 'followerId'
+});
+
+User.belongsToMany(User, {
+  through: Follower,
+  as: 'Followers',
+  foreignKey: 'followingId'
+});
