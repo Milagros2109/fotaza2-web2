@@ -3,6 +3,7 @@ import { User } from "./User.js";
 import { Post } from "./Post.js";
 import { Image } from "./Image.js";
 import { Tag } from "./Tag.js";
+import { Comment } from './Comment.js';
 
 let associationsInitialized = false;
 
@@ -21,6 +22,12 @@ export function initializeAssociations() {
 
   Tag.hasMany(Post, { foreignKey: 'tagId' });
   Post.belongsTo(Tag, { foreignKey: 'tagId' });
+
+  User.hasMany(Comment, { foreignKey: 'userId' });
+Comment.belongsTo(User, { foreignKey: 'userId' });
+
+Post.hasMany(Comment, { foreignKey: 'postId' });
+Comment.belongsTo(Post, { foreignKey: 'postId' });
 
   associationsInitialized = true;
 }

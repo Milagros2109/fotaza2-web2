@@ -1,6 +1,7 @@
 extends layout
 
 block content
+
   h1 Publicaciones
 
   form(method='GET' action='/posts')
@@ -10,17 +11,36 @@ block content
       placeholder='Buscar publicación'
       value=search
     )
-    button(type='submit') Buscar
+
+    button(type='submit')
+      Buscar
 
   br
-
   if posts.length === 0
     p No hay publicaciones cargadas.
-
   else
     each post in posts
       div
         h3= post.title
         p= post.description
         small Publicado el #{post.createdAt.toLocaleDateString()}
+        form(method='POST' action='/posts/comment')
+          input(
+            type='hidden'
+            name='postId'
+            value=post.id
+          )
+          input(
+            type='text'
+            name='content'
+            placeholder='Escribe un comentario'
+            required
+          )
+          button(type='submit')
+            Comentar
+        if post.Comments && post.Comments.length > 0
+          each comment in post.Comments
+            p
+              strong= comment.User.firstName + ': '
+              | #{comment.content}
         hr
