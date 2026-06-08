@@ -3,6 +3,17 @@ extends layout
 block content
   h1 Publicaciones
 
+  form(method='GET' action='/posts')
+    input(
+      type='text'
+      name='search'
+      placeholder='Buscar publicación'
+      value=search
+    )
+    button(type='submit') Buscar
+
+  br
+
   if posts.length === 0
     p No hay publicaciones cargadas.
 
