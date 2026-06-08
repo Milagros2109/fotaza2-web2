@@ -1,16 +1,43 @@
 extends ../layout
 
 block content
+
   h1 Crear publicación
 
-  form(method='POST' action='/posts/crear')
+  form(
+    method='POST'
+    action='/posts/crear'
+    enctype='multipart/form-data'
+  )
+
     div
       label(for='title') Título
-      input(type='text', id='title', name='title', required)
+      input(
+        type='text'
+        id='title'
+        name='title'
+        required
+      )
+
+    br
 
     div
       label(for='description') Descripción
-      textarea(id='description', name='description')
+      textarea(
+        id='description'
+        name='description'
+      )
+
+    br
 
     div
-      button(type='submit') Crear publicación
+      label(for='image') Imagen
+      input(
+        type='file'
+        id='image'
+        name='image'
+      )
+
+    br
+
+    button(type='submit') Crear publicación

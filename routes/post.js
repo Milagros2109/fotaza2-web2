@@ -8,13 +8,15 @@ import {
   followingPosts
 } from '../controller/post.js';
 
+import upload from '../middleware/multer.js';
+
 const post = Router();
 
 post.get('/', postList);
 
 post.get('/crear', createPostForm);
 
-post.post('/crear', createPost);
+post.post('/crear', upload.single('image'), createPost);
 
 post.post('/comment', createComment);
 
