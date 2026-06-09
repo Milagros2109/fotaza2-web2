@@ -6,6 +6,7 @@ import {
   logout,
   registro,
   registroForm
+  
 } from "../controller/auth.js";
 
 const auth = Router();
@@ -16,6 +17,8 @@ auth.post('/login', login);
 auth.get('/registro', registroForm);
 auth.post('/registro', registro);
 
+auth.get('/logout', logout);
 auth.post('/logout', logout);
+
 
 export default auth;

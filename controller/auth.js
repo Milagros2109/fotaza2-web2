@@ -33,7 +33,6 @@ export async function login(req, res) {
       return res.render('auth/login');
     }
 
-    // SESION
     req.session.user = {
       id: user.id,
     };
@@ -97,3 +96,4 @@ export async function logout(req, res) {
 
   res.redirect('/auth/login');
 }
+

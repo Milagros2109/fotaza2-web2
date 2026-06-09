@@ -1,30 +1,38 @@
-doctype html
-html
-  head
-    meta(charset='UTF-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(rel='stylesheet', href='/styles.css')
-    link(rel='stylesheet', href='/auth.css')
-    title Iniciar sesión
+extends ../layout
 
-  body
-    div.container
-      div.form-wrapper
-        h1 Iniciar sesión
+block content
 
-        form(method='POST', action='/auth/login')
+  div.auth-card
 
-          div.form-group
-            label(for='email') Email
-            input(type='email', id='email', name='email', required)
+    h1 Iniciar sesión
 
-          div.form-group
-            label(for='password') Contraseña
-            input(type='password', id='password', name='password', required)
+    p.auth-subtitle
+      | Ingresá a tu cuenta para publicar, comentar y valorar imágenes.
 
-          div.form-group.center
-            button(type='submit') Iniciar sesión
+    form(method='POST' action='/auth/login')
 
-          p.redirect-link
-            | ¿No tienes cuenta?
-            a(href='/auth/registro') Registrate aquí
+      div.form-group
+        label(for='email') Email
+        input(
+          type='email'
+          id='email'
+          name='email'
+          placeholder='ejemplo@gmail.com'
+          required
+        )
+
+      div.form-group
+        label(for='password') Contraseña
+        input(
+          type='password'
+          id='password'
+          name='password'
+          placeholder='Tu contraseña'
+          required
+        )
+
+      button.full-button(type='submit') iniciar sesión
+
+    p.auth-link
+      | ¿No tenés cuenta?
+      a(href='/auth/registro')  Registrate acá

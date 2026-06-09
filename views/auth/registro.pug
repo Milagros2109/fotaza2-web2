@@ -1,38 +1,59 @@
-doctype html
-html
-  head
-    meta(charset='UTF-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(rel='stylesheet', href='/styles.css')
-    link(rel='stylesheet', href='/auth.css')
-    title Registrarse
+extends ../layout
 
-  body
-    div.container
-      div.form-wrapper
-        h1 Registrarse
+block content
 
-        form(method='POST', action='/auth/registro')
+  div.auth-card
 
-          div.form-group
-            label(for='firstName') Nombre
-            input(type='text', id='firstName', name='firstName', required)
+    h1 Crear cuenta
 
-          div.form-group
-            label(for='lastName') Apellido
-            input(type='text', id='lastName', name='lastName', required)
+    p.auth-subtitle
+      | Registrate para empezar a compartir tus fotografías.
 
-          div.form-group
-            label(for='email') Email
-            input(type='email', id='email', name='email', required)
+    form(method='POST' action='/auth/registro')
 
-          div.form-group
-            label(for='password') Contraseña
-            input(type='password', id='password', name='password', required)
+      div.form-group
+        label(for='firstName') Nombre
+        input(
+          type='text'
+          id='firstName'
+          name='firstName'
+          placeholder='Tu nombre'
+          required
+        )
 
-          div.form-group.center
-            button(type='submit') Registrarse
+      div.form-group
+        label(for='lastName') Apellido
+        input(
+          type='text'
+          id='lastName'
+          name='lastName'
+          placeholder='Tu apellido'
+          required
+        )
 
-          p.redirect-link
-            | ¿Ya tienes cuenta?
-            a(href='/auth/login') Inicia sesión aquí
+      div.form-group
+        label(for='email') Email
+        input(
+          type='email'
+          id='email'
+          name='email'
+          placeholder='ejemplo@gmail.com'
+          required
+        )
+
+      div.form-group
+        label(for='password') Contraseña
+        input(
+          type='password'
+          id='password'
+          name='password'
+          placeholder='Crear contraseña'
+          required
+        )
+
+      button.full-button(type='submit')
+        Registrarse
+
+    p.auth-link
+      | ¿Ya tenés cuenta?
+      a(href='/auth/login')  Iniciá sesión
