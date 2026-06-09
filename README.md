@@ -1,4 +1,4 @@
-# Fotaza 2
+#  Fotaza 2
 
 Proyecto integrador desarrollado para la materia Programación Web II.
 
@@ -28,29 +28,31 @@ Fotaza es una aplicación web inspirada en una red social de fotografías donde 
 
 ## Instalación
 
-1. Clonar el repositorio
+### 1. Clonar el repositorio
 
 ```bash
 git clone URL_DEL_REPOSITORIO
 ```
 
-2. Instalar dependencias
+### 2. Instalar dependencias
 
 ```bash
 npm install
 ```
 
-3. Crear archivo `.env` tomando como referencia `.env.example`
+### 3. Crear archivo `.env`
 
-4. Ejecutar la aplicación
+Tomar como referencia el archivo `.env.example`.
 
-### Modo desarrollo
+### 4. Ejecutar la aplicación
+
+#### Modo desarrollo
 
 ```bash
 npm run dev
 ```
 
-### Modo producción
+#### Modo producción
 
 ```bash
 npm start
@@ -58,18 +60,27 @@ npm start
 
 ## Variables de entorno
 
-Crear un archivo `.env` utilizando como referencia `.env.example`.
+Ejemplo de configuración:
 
+```env
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=fotaza2
+DB_USER=postgres
+DB_PASSWORD=tu_password
+
+SESSION_SECRET=mi_clave_secreta
+```
 
 ## Datos de prueba
 
-Para cargar datos iniciales:
+Para cargar datos iniciales ejecutar:
 
 ```bash
 npm run seed
 ```
 
-Se crean los siguientes usuarios:
+## Usuarios de prueba
 
 | Usuario | Email                                         | Contraseña |
 | ------- | --------------------------------------------- | ---------- |
@@ -87,35 +98,47 @@ Estos usuarios permiten probar:
 
 ## Scripts disponibles
 
+### Iniciar aplicación
+
 ```bash
 npm start
 ```
 
-Inicia la aplicación.
+### Iniciar en modo desarrollo
 
 ```bash
 npm run dev
 ```
 
-Inicia la aplicación en modo desarrollo.
+### Cargar datos de prueba
 
 ```bash
 npm run seed
 ```
 
-Carga datos de prueba en la base de datos.
-
 ## Estructura del proyecto
 
 ```txt
 controller/
+middleware/
 models/
 routes/
 views/
-middleware/
 public/
 seeders/
 ```
+
+## Funcionalidades implementadas
+
+* Autenticación de usuarios.
+* Manejo de sesiones.
+* Publicaciones con imágenes.
+* Comentarios.
+* Búsqueda de publicaciones.
+* Seguimiento de usuarios.
+* Feed de publicaciones seguidas.
+* Valoración de imágenes.
+* Datos de prueba mediante seed.
 
 ## Limitaciones conocidas
 
