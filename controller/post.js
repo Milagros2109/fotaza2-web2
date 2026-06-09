@@ -1,5 +1,4 @@
 import { Op } from 'sequelize';
-
 import { Post } from '../models/Post.js';
 import { Comment } from '../models/Comment.js';
 import { User } from '../models/User.js';
@@ -106,7 +105,10 @@ export const createRating = async (req, res) => {
       }
     });
 
-    if (!exists) {
+    if (exists) {
+      exists.value = value;
+      await exists.save();
+    } else {
       await Rating.create({
         imageId,
         userId,

@@ -11,36 +11,24 @@ block content
       placeholder='Buscar publicación'
       value=search
     )
-
     button(type='submit') Buscar
-
   br
-
   if posts.length === 0
-
     p No hay publicaciones cargadas.
-
   else
-
     each post in posts
-
       div
-
         h3= post.title
-
         p= post.description
-
         if post.Images && post.Images.length > 0
           each image in post.Images
             img(src=image.path, alt=post.title, width='300')
-
             form(method='POST' action='/posts/rating')
               input(
                 type='hidden'
                 name='imageId'
                 value=image.id
               )
-
               select(name='value')
                 option(value='1') 1
                 option(value='2') 2
@@ -52,9 +40,8 @@ block content
 
             if image.Ratings && image.Ratings.length > 0
               - const total = image.Ratings.reduce((sum, rating) => sum + rating.value, 0)
-              - const calificacion = total / image.Ratings.length
-
-              p Calificación: #{calificacion.toFixed(1)}s
+              - const Calificacion = total / image.Ratings.length
+              p Calificación: #{Calificacion.toFixed(1)}
               p Votos: #{image.Ratings.length}
 
             else
@@ -65,7 +52,6 @@ block content
         small Publicado el #{post.createdAt.toLocaleDateString()}
 
         form(method='POST' action='/posts/comment')
-
           input(
             type='hidden'
             name='postId'
@@ -82,9 +68,7 @@ block content
           button(type='submit') Comentar
 
         if post.Comments && post.Comments.length > 0
-
           each comment in post.Comments
-
             p
               strong= comment.User.firstName + ': '
               | #{comment.content}
