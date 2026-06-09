@@ -1,9 +1,11 @@
 import { Op } from 'sequelize';
+
 import { Post } from '../models/Post.js';
 import { Comment } from '../models/Comment.js';
 import { User } from '../models/User.js';
 import { Follower } from '../models/Follower.js';
 import { Image } from '../models/Image.js';
+import { Rating } from '../models/Rating.js';
 
 export const postList = async (req, res) => {
   const search = req.query.search || '';
@@ -30,7 +32,8 @@ export const postList = async (req, res) => {
         ]
       },
       {
-        model: Image
+        model: Image,
+        include: [Rating]
       }
     ],
     order: [['createdAt', 'DESC']]
@@ -91,6 +94,34 @@ export const createComment = async (req, res) => {
   }
 };
 
+export const createRating = async (req, res) => {
+  const { imageId, value } = req.body;
+  const userId = req.session.user.id;
+
+  try {
+    const exists = await Rating.findOne({
+      where: {
+        imageId,
+        userId
+      }
+    });
+
+    if (!exists) {
+      await Rating.create({
+        imageId,
+        userId,
+        value
+      });
+    }
+
+    res.redirect('/posts');
+
+  } catch (error) {
+    console.error(error);
+    res.redirect('/posts');
+  }
+};
+
 export const followingPosts = async (req, res) => {
   const userId = req.session.user.id;
 
@@ -109,7 +140,8 @@ export const followingPosts = async (req, res) => {
       },
       include: [
         {
-          model: Image
+          model: Image,
+          include: [Rating]
         }
       ],
       order: [['createdAt', 'DESC']]

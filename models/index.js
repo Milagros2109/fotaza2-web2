@@ -5,6 +5,7 @@ import { Image } from "./Image.js";
 import { Tag } from "./Tag.js";
 import { Comment } from './Comment.js';
 import { Follower } from './Follower.js';
+import { Rating } from './Rating.js';
 
 let associationsInitialized = false;
 
@@ -29,6 +30,12 @@ Comment.belongsTo(User, { foreignKey: 'userId' });
 
 Post.hasMany(Comment, { foreignKey: 'postId' });
 Comment.belongsTo(Post, { foreignKey: 'postId' });
+
+User.hasMany(Rating, { foreignKey: 'userId' });
+Rating.belongsTo(User, { foreignKey: 'userId' });
+
+Image.hasMany(Rating, { foreignKey: 'imageId' });
+Rating.belongsTo(Image, { foreignKey: 'imageId' });
 
   associationsInitialized = true;
 }

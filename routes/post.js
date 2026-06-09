@@ -5,6 +5,7 @@ import {
   createPostForm,
   createPost,
   createComment,
+  createRating,
   followingPosts
 } from '../controller/post.js';
 
@@ -19,6 +20,8 @@ post.get('/crear', createPostForm);
 post.post('/crear', upload.single('image'), createPost);
 
 post.post('/comment', createComment);
+
+post.post('/rating', createRating);
 
 post.get('/following', followingPosts);
 
