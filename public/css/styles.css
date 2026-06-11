@@ -49,9 +49,10 @@ a {
 }
 
 .container {
-  max-width: 950px;
   margin: 40px auto;
   padding: 0 20px;
+  max-width: 1150px;
+  max-width: 1150px;
 }
 
 h1 {
@@ -279,4 +280,246 @@ strong {
 .empty-message {
   text-align: center;
   color: #aaa;
+}
+.error {
+  color: #ff6b6b;
+  font-size: 14px;
+  margin-top: 4px;
+}
+.users-list {
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.user-card {
+  width: 100%;
+  margin: 0 0 24px 0;
+  background-color: #1a1a1a;
+  border: 1px solid #2b2b2b;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.user-card form {
+  margin-top: 12px;
+}
+
+.badge {
+  display: inline-block;
+  background-color: #43a047;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+button.secondary {
+  background-color: #333;
+}
+
+button.secondary:hover {
+  background-color: #43a047;
+}
+
+
+.profile-card {
+  max-width: 950px;
+  margin: 0 auto 30px auto;
+  background-color: #1a1a1a;
+  border: 1px solid #2b2b2b;
+  border-radius: 16px;
+  padding: 28px;
+  overflow: hidden;
+}
+
+.profile-card p {
+  word-break: break-word;
+}
+
+.profile-card h1,
+.profile-card h2 {
+  margin-top: 0;
+    color: #e53935;
+}
+
+.post-card {
+  width: 100%;
+  max-width: 950px;
+  margin: 0 auto 28px auto;
+}
+
+.post-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+h2 {
+  max-width: 950px;
+  margin: 30px auto 20px auto;
+  color: #e53935;
+}
+.home-header {
+  max-width: 1000px;
+  margin: 0 auto 36px auto;
+  text-align: center;
+}
+
+.feed {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-card h3 {
+  font-size: 26px;
+  margin-bottom: 12px;
+}
+
+.rating-text {
+  margin-top: 10px;
+}
+
+.empty-message a {
+  color: #e53935;
+  font-weight: bold;
+}
+.feed-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.feed-grid .post-card {
+  max-width: 100%;
+  margin: 0;
+}
+
+.feed-grid .post-image {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.images-grid .post-image {
+  height: 220px;
+}
+
+@media (max-width: 800px) {
+  .feed-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.post-author {
+  color: #43a047;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: -6px;
+  margin-bottom: 14px;
+}
+
+.rating-box {
+  background-color: #181818;
+  border: 1px solid #2b2b2b;
+  border-left: 4px solid #43a047;
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-top: 10px;
+}
+
+.rating-box p {
+  margin: 0;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.rating-box span {
+  display: block;
+  margin-top: 4px;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.post-author {
+  text-align: center;
+}
+
+.post-description {
+  text-align: center;
+}
+
+.images-grid {
+  display: flex;
+  justify-content: center;
+}
+
+.image-box .post-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.post-card {
+  min-height: 900px;
+}
+
+.rating-box {
+  width: 250px;
+  margin: 15px auto;
+}
+
+.post-date {
+  display: block;
+  text-align: center;
+}
+
+.comment-form {
+  justify-content: center;
+}
+
+.comments {
+  text-align: left;
+}
+.post-card h3 {
+  text-align: center;
+}
+
+.profile-card .post-card {
+  min-height: auto;
+}
+
+.feed-grid .image-box .post-image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+.profile-image {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  border-radius: 14px;
+  display: block;
+  margin: 15px auto;
 }

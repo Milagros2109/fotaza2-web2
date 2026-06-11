@@ -13,11 +13,16 @@ html(lang='es')
 
       nav.menu
         a(href='/') Inicio
-        a(href='/posts') Publicaciones
-        a(href='/posts/crear') Crear publicación
-        a(href='/posts/following') Seguidos
-        a(href='/users') Usuarios
-        a.logout(href='/auth/logout') Cerrar sesión
+
+        if currentUser
+          a(href='/posts/crear') Crear publicación
+          a(href='/posts/following') Seguidos
+          a(href='/users') Usuarios
+          a(href='/auth/logout') Cerrar sesión
+          a(href='/users/profile') Mi perfil
+        else
+          a(href='/auth/login') Iniciar sesión
+          a(href='/auth/registro') Registrarse
 
     main.container
       block content

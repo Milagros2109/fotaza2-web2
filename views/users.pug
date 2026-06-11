@@ -6,16 +6,34 @@ block content
 
   each user in users
 
-    div
+    div.user-card
+
       p #{user.firstName} #{user.lastName}
 
-      form(method='POST' action='/users/follow')
-        input(
-          type='hidden'
-          name='followingId'
-          value=user.id
-        )
+      if Number(user.id) === Number(currentUserId)
 
-        button(type='submit') Seguir
+        span.badge Es tu usuario
 
-      hr
+      else if followingIds.includes(user.id)
+
+        span.badge Siguiendo
+
+        form(method='POST' action='/users/unfollow')
+          input(
+            type='hidden'
+            name='followingId'
+            value=user.id
+          )
+
+          button.secondary(type='submit') Dejar de seguir
+
+      else
+
+        form(method='POST' action='/users/follow')
+          input(
+            type='hidden'
+            name='followingId'
+            value=user.id
+          )
+
+          button(type='submit') Seguir

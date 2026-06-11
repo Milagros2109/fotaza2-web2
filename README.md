@@ -25,6 +25,7 @@ Fotaza es una aplicación web inspirada en una red social de fotografías donde 
 * Express Session
 * Bcrypt
 * Multer
+* Zod
 
 ## Instalación
 

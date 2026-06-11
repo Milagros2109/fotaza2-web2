@@ -1,10 +1,13 @@
 import { Op } from 'sequelize';
+
 import { Post } from '../models/Post.js';
 import { Comment } from '../models/Comment.js';
 import { User } from '../models/User.js';
 import { Follower } from '../models/Follower.js';
 import { Image } from '../models/Image.js';
 import { Rating } from '../models/Rating.js';
+
+import { postValidation } from '../helpers/validations.js';
 
 export const postList = async (req, res) => {
   const search = req.query.search || '';
@@ -21,6 +24,10 @@ export const postList = async (req, res) => {
   const posts = await Post.findAll({
     where,
     include: [
+      {
+        model: User,
+        attributes: ['firstName', 'lastName']
+      },
       {
         model: Comment,
         include: [
@@ -50,37 +57,59 @@ export const createPostForm = (req, res) => {
 };
 
 export const createPost = async (req, res) => {
+  const validation = postValidation(req.body);
+
+  if (!validation.success) {
+    return res.status(400).render('post/crear', {
+      errors: validation.errors,
+      formValues: req.body
+    });
+  }
+
   const { title, description } = req.body;
 
   try {
     const post = await Post.create({
-      title,
-      description,
+      title: title.trim(),
+      description: description ? description.trim() : '',
       userId: req.session.user.id
     });
 
-    if (req.file) {
-      await Image.create({
-        filename: req.file.filename,
-        path: `/uploads/${req.file.filename}`,
-        postId: post.id
-      });
+    if (req.files && req.files.length > 0) {
+      for (const file of req.files) {
+        await Image.create({
+          filename: file.filename,
+          path: `/uploads/${file.filename}`,
+          postId: post.id
+        });
+      }
     }
 
     res.redirect('/posts');
 
   } catch (error) {
     console.error(error);
-    res.render('post/crear');
+
+    res.status(500).render('post/crear', {
+      alert: {
+        status: "error",
+        text: "Hubo un error al crear la publicación"
+      },
+      formValues: req.body
+    });
   }
 };
 
 export const createComment = async (req, res) => {
   const { content, postId } = req.body;
 
+  if (!content || !content.trim()) {
+    return res.redirect('/posts');
+  }
+
   try {
     await Comment.create({
-      content,
+      content: content.trim(),
       postId,
       userId: req.session.user.id
     });
@@ -141,6 +170,10 @@ export const followingPosts = async (req, res) => {
         userId: followingIds
       },
       include: [
+        {
+          model: User,
+          attributes: ['firstName', 'lastName']
+        },
         {
           model: Image,
           include: [Rating]

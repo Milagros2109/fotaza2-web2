@@ -2,42 +2,52 @@ extends ../layout
 
 block content
 
-  h1 Crear publicación
+  div.form-card
 
-  form(
-    method='POST'
-    action='/posts/crear'
-    enctype='multipart/form-data'
-  )
+    h1 Crear publicación
 
-    div
-      label(for='title') Título
-      input(
-        type='text'
-        id='title'
-        name='title'
-        required
-      )
+    p.auth-subtitle
+      | Compartí una o más imágenes con la comunidad.
 
-    br
+    form(
+      method='POST'
+      action='/posts/crear'
+      enctype='multipart/form-data'
+    )
 
-    div
-      label(for='description') Descripción
-      textarea(
-        id='description'
-        name='description'
-      )
+      div.form-group
+        label(for='title') Título
+        input(
+          type='text'
+          id='title'
+          name='title'
+          placeholder='Ej: Atardecer en la montaña'
+          value=(formValues && formValues.title) ? formValues.title : ''
+          required
+        )
 
-    br
+        if errors && errors.title
+          p.error= errors.title[0]
 
-    div
-      label(for='image') Imagen
-      input(
-        type='file'
-        id='image'
-        name='image'
-      )
+      div.form-group
+        label(for='description') Descripción
+        textarea(
+          id='description'
+          name='description'
+          placeholder='Escribí una breve descripción'
+        ) #{(formValues && formValues.description) ? formValues.description : ''}
 
-    br
+        if errors && errors.description
+          p.error= errors.description[0]
 
-    button(type='submit') Crear publicación
+      div.form-group
+        label(for='images') Imágenes
+        input(
+          type='file'
+          id='images'
+          name='images'
+          multiple
+          required
+        )
+
+      button.full-button(type='submit') Crear publicación

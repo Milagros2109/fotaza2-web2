@@ -7,6 +7,7 @@ import authRouter from './routes/auth.js';
 import postRouter from './routes/post.js';
 import { authMiddleware } from './middleware/auth.js';
 import userRouter from './routes/user.js';
+import { postList } from './controller/post.js';
 
 // CONSTANTES
 const PORT = process.env.PORT;
@@ -35,6 +36,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
   res.locals.currentPath = req.path;
+  res.locals.currentUser = req.session.user || null;
   next();
 });
 
@@ -43,16 +45,10 @@ app.set('view engine', 'pug');
 app.set('views', './views');
 
 // RUTAS
-app.get('/', (req, res) => {
-
-  res.render('index', {
-    pagina: 'Inicio'
-  });
-
-});
+app.get('/', postList);
 
 app.use('/auth', authRouter);
-app.use('/posts', authMiddleware, postRouter);
+app.use('/posts', postRouter);
 app.use('/users', authMiddleware, userRouter);
 
 // SERVIDOR

@@ -1,0 +1,57 @@
+extends layout
+
+block content
+
+  div.profile-card
+
+    h1 Mi perfil
+
+    p
+      strong Nombre:
+      |  #{user.firstName} #{user.lastName}
+
+    p
+      strong Email:
+      |  #{user.email}
+
+    p
+      strong Seguidores:
+      |  #{followersCount}
+
+    p
+      strong Siguiendo:
+      |  #{followingCount}
+
+  div.profile-card
+
+    h2 Usuarios que sigo
+
+    if followingUsers && followingUsers.length > 0
+
+      each followedUser in followingUsers
+
+        p #{followedUser.firstName} #{followedUser.lastName}
+
+    else
+
+      p Todavía no seguís a ningún usuario.
+
+  h2 Mis publicaciones
+
+  if user.Posts && user.Posts.length > 0
+
+    each post in user.Posts
+
+      div.post-card
+
+        h3= post.title
+
+        p= post.description
+
+        if post.Images && post.Images.length > 0
+          each image in post.Images
+            img.profile-image(src=image.path, alt=post.title)
+
+  else
+
+    p.empty-message Todavía no creaste publicaciones.

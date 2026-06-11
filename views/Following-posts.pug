@@ -2,22 +2,26 @@ extends layout
 
 block content
 
-  h1 Publicaciones de usuarios seguidos
+  section.page-header
+    h1 Publicaciones de usuarios seguidos
+    p.auth-subtitle Mirá las publicaciones de los usuarios que seguís.
 
   if posts.length === 0
 
-    p No hay publicaciones para mostrar.
+    p.empty-message No hay publicaciones para mostrar.
 
   else
 
     each post in posts
 
-      div
+      article.post-card
 
         h3= post.title
 
-        p= post.description
+        p.post-description= post.description
 
-        small Publicado el #{post.createdAt.toLocaleDateString()}
+        if post.Images && post.Images.length > 0
+          each image in post.Images
+            img.post-image(src=image.path, alt=post.title)
 
-        hr
+        small.post-date Publicado el #{post.createdAt.toLocaleDateString()}

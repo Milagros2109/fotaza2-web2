@@ -1,6 +1,9 @@
 import { Router } from 'express';
 
-import { userList } from '../controller/user.js';
+import {
+  userList,
+  profile
+} from '../controller/user.js';
 
 import {
   followUser,
@@ -10,6 +13,8 @@ import {
 const user = Router();
 
 user.get('/', userList);
+
+user.get('/profile', profile);
 
 user.post('/follow', followUser);
 
