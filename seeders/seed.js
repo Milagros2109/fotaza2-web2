@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import sequelize from '../models/config.js';
 import { initializeAssociations } from '../models/index.js';
 
-import { User } from '../models/User.js';
+import { User } from '../models/user.js';
 import { Post } from '../models/Post.js';
 import { Tag } from '../models/Tag.js';
 import { Image } from '../models/Image.js';

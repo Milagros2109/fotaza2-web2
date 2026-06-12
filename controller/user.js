@@ -1,4 +1,4 @@
-import { User } from '../models/User.js';
+import { User } from '../models/user.js';
 import { Follower } from '../models/Follower.js';
 import { Post } from '../models/Post.js';
 import { Image } from '../models/Image.js';

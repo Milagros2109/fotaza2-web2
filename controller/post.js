@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
 import { Post } from '../models/Post.js';
 import { Comment } from '../models/Comment.js';
-import { User } from '../models/User.js';
+import { User } from '../models/user.js';
 import { Follower } from '../models/Follower.js';
 import { Image } from '../models/Image.js';
 import { Rating } from '../models/Rating.js';

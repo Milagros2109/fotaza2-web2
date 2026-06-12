@@ -1,4 +1,4 @@
-import { User } from "../models/User.js";
+import { User } from "../models/user.js";
 
 export async function authMiddleware(req, res, next) {
   const sessionUser = req.session.user;
