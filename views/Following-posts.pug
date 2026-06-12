@@ -21,7 +21,9 @@ block content
         p.post-description= post.description
 
         if post.Images && post.Images.length > 0
+
           each image in post.Images
-          img.following-image(src=image.path, alt=post.title)
+
+            img.following-image(src=image.path, alt=post.title)
 
         small.post-date Publicado el #{post.createdAt.toLocaleDateString()}
