@@ -194,7 +194,7 @@ export const followingPosts = async (req, res) => {
       order: [['createdAt', 'DESC']]
     });
 
-    res.render('following-posts', {
+    res.render('Following-posts', {
       pagina: 'Publicaciones seguidas',
       posts
     });
