@@ -523,3 +523,10 @@ h2 {
   display: block;
   margin: 15px auto;
 }
+.following-image {
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  border-radius: 14px;
+}

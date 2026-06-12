@@ -45,7 +45,7 @@ block content
 
                   img.post-image(src=image.path, alt=post.title)
 
-                  if currentUser
+                  if currentUser && post.userId != currentUser.id
 
                     form.rating-form(method='POST' action='/posts/rating')
 
@@ -79,7 +79,7 @@ block content
                       p Sin valoraciones
                       span Sé el primero en valorar
 
-          small.post-date usuario: #{post.createdAt.toLocaleDateString()}
+          small.post-date Publicado: #{post.createdAt.toLocaleDateString()}
 
           if currentUser
 

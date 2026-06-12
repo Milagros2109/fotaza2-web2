@@ -88,6 +88,21 @@ npm run seed
 | aldair  | [prueba1@gmail.com](mailto:prueba1@gmail.com) | 12345      |
 | prueba2 | [prueba2@gmail.com](mailto:prueba2@gmail.com) | 12345      |
 
+
+El proyecto incluye usuarios precargados mediante el archivo seed para facilitar las pruebas.
+
+### Usuario 1
+
+* Nombre: Jeremy Prueba
+* Email: [jeremy@test.com](mailto:jeremy@test.com)
+* Contraseña: 123456
+
+### Usuario 2
+
+* Nombre: Aldair Prueba
+* Email: [aldair@test.com](mailto:aldair@test.com)
+* Contraseña: 123456
+
 Estos usuarios permiten probar:
 
 * Inicio de sesión.
@@ -143,7 +158,6 @@ seeders/
 
 ## Limitaciones conocidas
 
-* Actualmente cada publicación permite una imagen.
 * No se implementó edición de publicaciones.
 * No se implementó recuperación de contraseña.
 * No se implementó sistema de notificaciones.

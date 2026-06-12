@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "dev": "node --watch app.js",
-    "seed": "node ./seeders/seed.js"
+    "seed": "node ./seeders/seed.js",
+    "db:init": "node ./seeders/seed.js"
   },
   "type": "module",
   "author": "Alfaro",

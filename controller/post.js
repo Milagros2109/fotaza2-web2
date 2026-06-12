@@ -1,5 +1,4 @@
 import { Op } from 'sequelize';
-
 import { Post } from '../models/Post.js';
 import { Comment } from '../models/Comment.js';
 import { User } from '../models/User.js';
@@ -127,6 +126,19 @@ export const createRating = async (req, res) => {
   const userId = req.session.user.id;
 
   try {
+    const image = await Image.findByPk(imageId, {
+      include: [Post]
+    });
+
+    if (!image) {
+      return res.redirect('/posts');
+    }
+
+    // No permitir que el autor valore su propia imagen
+    if (Number(image.Post.userId) === Number(userId)) {
+      return res.redirect('/posts');
+    }
+
     const exists = await Rating.findOne({
       where: {
         imageId,
