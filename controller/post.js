@@ -77,10 +77,10 @@ export const createPost = async (req, res) => {
     if (req.files && req.files.length > 0) {
       for (const file of req.files) {
         await Image.create({
-          filename: file.filename,
-          path: `/uploads/${file.filename}`,
-          postId: post.id
-        });
+  filename: file.originalname,
+  path: file.path,
+  postId: post.id
+});
       }
     }
 
